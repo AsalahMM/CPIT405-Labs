@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab 6</title>
+
+<style>
+* {
+box-sizing: border-box;
+}
+
+body {
+font-family: Georgia, serif;
+text-align: center;
+margin: 0;
+padding: 40px 20px;
+background: white;
+color: black;
+}
+
+.container {
+max-width: 900px;
+margin: auto;
+}
+
+h1 {
+font-size: 48px;
+margin-bottom: 35px;
+}
+
+h2 {
+font-size: 36px;
+margin-bottom: 40px;
+}
+
+.buttons {
+display: flex;
+justify-content: center;
+gap: 24px;
+flex-wrap: wrap;
+margin-bottom: 40px;
+}
+
+.vote-btn {
+font-family: Arial, sans-serif;
+font-size: 48px;
+padding: 15px 35px;
+border: 1px solid #aaa;
+border-radius: 6px;
+background: #e9e9ed;
+cursor: pointer;
+}
+
+.vote-btn:disabled {
+opacity: 0.5;
+cursor: not-allowed;
+}
+
+textarea {
+width: 100%;
+height: 180px;
+padding: 15px;
+font-size: 22px;
+border: 1px solid #ccc;
+border-radius: 8px;
+}
+
+.actions {
+margin-top: 20px;
+}
+
+.actions button {
+font-family: Arial, sans-serif;
+font-size: 22px;
+padding: 15px 30px;
+margin: 0 8px;
+border: none;
+border-radius: 7px;
+background: #555;
+color: white;
+cursor: pointer;
+}
+
+.actions button:disabled {
+opacity: 0.5;
+cursor: not-allowed;
+}
+
+#message {
+font-family: Arial, sans-serif;
+color: #245b87;
+font-size: 17px;
+}
+
+#commentsList {
+text-align: left;
+margin-top: 25px;
+font-family: Arial, sans-serif;
+}
+
+.comment {
+background: #f1f1f5;
+padding: 15px;
+border-radius: 6px;
+margin-bottom: 10px;
+overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+h1 {
+font-size: 36px;
+}
+
+h2 {
+font-size: 28px;
+}
+
+.vote-btn {
+font-size: 32px;
+padding: 12px 20px;
+}
+
+textarea {
+height: 150px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Lab 6</h1>
+<h2>Like or dislike</h2>
+
+<div class="buttons">
+<button class="vote-btn" id="likeBtn">
+👍<span id="likeCount">100</span>
+</button>
+
+<button class="vote-btn" id="dislikeBtn">
+👎<span id="dislikeCount">20</span>
+</button>
+</div>
+
+<h2>Comments</h2>
+
+<textarea id="commentInput"
+placeholder="Write a comment..."></textarea>
+
+<div class="actions">
+<button id="submitBtn">Submit</button>
+<button id="clearBtn">Clear</button>
+</div>
+
+<p id="message" aria-live="polite"></p>
+
+<div id="commentsList"></div>
+
+</div>
+
+<script>
+const initialLikes = 0;
+const initialDislikes = 0;
+
+const likeBtn = document.getElementById("likeBtn");
+const dislikeBtn = document.getElementById("dislikeBtn");
+const likeCount = document.getElementById("likeCount");
+const dislikeCount = document.getElementById("dislikeCount");
+const commentInput = document.getElementById("commentInput");
+const submitBtn = document.getElementById("submitBtn");
+const clearBtn = document.getElementById("clearBtn");
+const commentsList = document.getElementById("commentsList");
+const message = document.getElementById("message");
+
+function setCookie(name, value) {
+const date = new Date();
+date.setTime(date.getTime() + 30 * 24 * 60 * 60 * 1000);
+
+document.cookie =
+name + "=" + encodeURIComponent(value) +
+"; expires=" + date.toUTCString() +
+"; path=/; SameSite=Lax";
+}
+
+function getCookie(name) {
+const cookies = document.cookie.split("; ");
+
+for (const cookie of cookies) {
+const index = cookie.indexOf("=");
+
+if (index === -1) continue;
+
+const key = cookie.substring(0, index);
+const value = cookie.substring(index + 1);
+
+if (key === name) {
+return decodeURIComponent(value);
+}
+}
+
+return null;
+}
+
+function deleteCookie(name) {
+document.cookie =
+name + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT;" +
+" path=/; SameSite=Lax";
+}
+
+function readNumber(name, defaultValue) {
+const value = getCookie(name);
+const number = Number(value);
+
+if (value === null || !Number.isFinite(number)) {
+return defaultValue;
+}
+
+return number;
+}
+
+let likes = readNumber("lab6_likes", initialLikes);
+let dislikes = readNumber("lab6_dislikes", initialDislikes);
+let userVote = getCookie("lab6_vote");
+
+let comments = [];
+
+try {
+const saved = getCookie("lab6_comments");
+
+if (saved !== null) {
+const parsed = JSON.parse(saved);
+
+if (Array.isArray(parsed)) {
+comments = parsed;
+}
+}
+} catch (error) {
+comments = [];
+}
+
+let hasCommented =
+getCookie("lab6_commented") === "true";
+
+function updateDisplay() {
+likeCount.textContent = likes;
+dislikeCount.textContent = dislikes;
+
+likeBtn.disabled = userVote !== null;
+dislikeBtn.disabled = userVote !== null;
+
+submitBtn.disabled = hasCommented;
+commentInput.disabled = hasCommented;
+
+commentsList.innerHTML = "";
+
+comments.forEach(function(comment) {
+const div = document.createElement("div");
+div.className = "comment";
+div.textContent = comment;
+commentsList.appendChild(div);
+});
+}
+
+function vote(choice) {
+if (userVote !== null) return;
+
+if (choice === "like") {
+likes++;
+setCookie("lab6_likes", likes);
+} else {
+dislikes++;
+setCookie("lab6_dislikes", dislikes);
+}
+
+userVote = choice;
+setCookie("lab6_vote", choice);
+
+updateDisplay();
+message.textContent = "Your vote has been saved!";
+}
+
+likeBtn.addEventListener("click", function() {
+vote("like");
+});
+
+dislikeBtn.addEventListener("click", function() {
+vote("dislike");
+});
+
+submitBtn.addEventListener("click", function() {
+const comment = commentInput.value.trim();
+
+if (hasCommented) return;
+
+if (comment === "") {
+message.textContent = "Please write a comment first.";
+return;
+}
+
+comments.push(comment);
+setCookie("lab6_comments", JSON.stringify(comments));
+
+hasCommented = true;
+setCookie("lab6_commented", "true");
+
+commentInput.value = "";
+
+updateDisplay();
+message.textContent = "Comment submitted!";
+});
+
+clearBtn.addEventListener("click", function() {
+deleteCookie("lab6_likes");
+deleteCookie("lab6_dislikes");
+deleteCookie("lab6_vote");
+deleteCookie("lab6_comments");
+deleteCookie("lab6_commented");
+
+likes = initialLikes;
+dislikes = initialDislikes;
+userVote = null;
+comments = [];
+hasCommented = false;
+
+commentInput.value = "";
+
+updateDisplay();
+message.textContent = "All votes and comments cleared!";
+});
+
+updateDisplay();
+</script>
+
+</body>
+</html>
+
+
+
