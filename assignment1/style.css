@@ -1,0 +1,351 @@
+/* Portfolio - Asala Mahmoud */
+:root {
+--sage-dark: #52786C;
+--sage-light: #A5BFAE;
+--sage-pale: #E3EDE7;
+--background: #F6FAF7;
+--text: #344F46;
+--white: #FFFFFF;
+}
+{
+box-sizing: border-box;
+}
+body {
+margin: 0;
+font-family: Georgia, "Times New Roman", serif;
+background-color: var(--background);
+color: var(--text);
+line-height: 1.7;
+}
+.container {
+width: 90%;
+max-width: 1100px;
+margin: 0 auto;
+}
+/* Header and Navigation */
+header {
+background-color: var(--sage-dark);
+color: var(--white);
+padding: 30px 0;
+text-align: center;
+}
+header h1 {
+margin: 0;
+font-size: 36px;
+}
+header p {
+margin: 5px 0 20px;
+}
+nav {
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+gap: 12px;
+}
+nav a {
+color: var(--white);
+text-decoration: none;
+padding: 9px 16px;
+border-radius: 8px;
+transition: background-color 0.3s;
+}
+nav a:hover,
+nav a.active {
+background-color: #344F46;
+}
+/* Home Page */
+.hero {
+background-color: var(--sage-pale);
+text-align: center;
+padding: 65px 30px;
+margin: 35px 0;
+border-radius: 16px;
+}
+.eyebrow {
+color: var(--sage-dark);
+font-size: 13px;
+font-weight: bold;
+letter-spacing: 2px;
+}
+.hero h2 {
+font-size: 36px;
+margin: 12px 0;
+}
+.intro {
+max-width: 680px;
+margin: 0 auto 25px;
+font-size: 17px;
+}
+.button {
+display: inline-block;
+background-color: var(--sage-dark);
+color: var(--white);
+padding: 12px 24px;
+border-radius: 8px;
+text-decoration: none;
+transition: background-color 0.3s, transform 0.3s;
+}
+.button:hover {
+background-color: #344F46;
+transform: translateY(-2px);
+}
+/* Cards and Sections */
+.card {
+background-color: var(--white);
+padding: 30px;
+margin: 25px 0;
+border-radius: 14px;
+box-shadow: 0 4px 15px rgba(52, 79, 70, 0.08);
+}
+.card h2 {
+color: var(--sage-dark);
+margin-top: 0;
+}
+.feature-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 20px;
+}
+.feature {
+background-color: var(--sage-pale);
+padding: 22px;
+border-radius: 12px;
+}
+.feature h3 {
+margin-top: 0;
+}
+.feature a {
+color: var(--sage-dark);
+font-weight: bold;
+}
+.feature a:hover {
+color: #344F46;
+}
+/* General Links */
+main a:not(.button):hover {
+text-decoration: underline;
+}
+/* Footer */
+footer {
+background-color: var(--sage-dark);
+color: var(--white);
+text-align: center;
+padding: 18px;
+margin-top: 40px;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+header h1 {
+font-size: 28px;
+}
+.hero {
+    padding: 40px 20px;
+}
+
+.hero h2 {
+    font-size: 28px;
+}
+
+.feature-grid {
+    grid-template-columns: 1fr;
+}
+
+.card {
+    padding: 22px;
+}
+}
+
+/* Contact Form */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #344F46;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #A5BFAE;
+    border-radius: 8px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: #FFFFFF;
+    color: #344F46;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: 2px solid #52786C;
+    outline-offset: 2px;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+button.button {
+    background-color: #52786C;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button.button:hover {
+    background-color: #344F46;
+}
+
+#formStatus {
+    margin-top: 15px;
+    color: #52786C;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #A5BFAE;
+    border-radius: 8px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    background-color: #FFFFFF;
+    color: #344F46;
+    box-sizing: border-box;
+}
+
+.form-group select:focus {
+    outline: 2px solid #52786C;
+    outline-offset: 2px;
+}
+
+/* CV Section Navigation */
+
+.cv-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.cv-links a {
+    display: inline-block;
+    padding: 10px 16px;
+    background-color: #E3EDE7;
+    color: #344F46;
+    border: 1px solid #A5BFAE;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.cv-links a:hover {
+    background-color: #52786C;
+    color: white;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+section[id] {
+    scroll-margin-top: 20px;
+}
+
+/* Responsive Design Improvements */
+
+img {
+max-width: 100%;
+height: auto;
+}
+
+@media (max-width: 768px) {
+
+.container {
+    width: 92%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header {
+    padding: 24px 12px;
+}
+
+header h1 {
+    font-size: 30px;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+nav a {
+    font-size: 14px;
+    padding: 8px 12px;
+}
+
+.hero {
+    padding: 30px 16px;
+}
+
+.hero h2 {
+    font-size: 28px;
+}
+
+.card {
+    padding: 20px 16px;
+}
+
+.feature-grid {
+    grid-template-columns: 1fr;
+}
+
+.cv-links {
+    gap: 8px;
+}
+
+.cv-links a {
+    font-size: 13px;
+    padding: 8px 12px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+}
+}
+
+@media (max-width: 480px) {
+
+header h1 {
+    font-size: 25px;
+}
+
+nav a {
+    font-size: 13px;
+    padding: 7px 10px;
+}
+
+.hero h2 {
+    font-size: 25px;
+}
+
+.card h2 {
+    font-size: 22px;
+}
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Asala Mahmoud</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+    <div class="container header-content">
+        <h1>Asala Mahmoud</h1>
+        <p>Information Technology Student</p>
+
+        <nav aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="cv.html">CV</a>
+            <a href="labs.html">Labs & Projects</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+
+    <section class="hero">
+        <p class="eyebrow">GET IN TOUCH</p>
+        <h2>Contact Me</h2>
+        <p class="intro">
+            Feel free to reach out for academic inquiries,
+            collaboration opportunities, or questions.
+        </p>
+    </section>
+
+    <section class="card">
+        <h2>Contact Information</h2>
+
+        <p>
+            <strong>Email:</strong>
+            <a href="mailto:amunahir@stu.edu.sa">
+                amunahir@stu.edu.sa
+            </a>
+        </p>
+
+        <p>
+            <strong>GitHub:</strong>
+            <a href="https://github.com/AsalahMM"
+               target="_blank"
+               rel="noopener noreferrer">
+                github.com/AsalahMM
+            </a>
+        </p>
+
+        <p>
+            <strong>University:</strong>
+            King Abdulaziz University
+        </p>
+    </section>
+
+    <section class="card">
+        <h2>Send a Message</h2>
+
+       <form action="https://api.web3forms.com/submit" method="POST">
+    <input type="hidden" name="access_key" value="167f33f9-c9f5-4f31-b715-14ddcda46825">
+<input type="hidden" name="redirect" value="https://asalahmm.github.io/CPIT405-Labs/assignment1/thank-you.html">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your name"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <div class="form-group">
+    <label for="messageType">Message Type</label>
+    <select id="messageType" name="message_type" required>
+        <option value="" disabled selected>
+            Select message type
+        </option>
+        <option value="Inquiry">Inquiry</option>
+        <option value="Feedback">Feedback</option>
+    </select>
+</div>
+                <label for="message">Message</label>
+                <textarea
+                    id="message"
+                    name="message"
+                    rows="6"
+                    placeholder="Write your message here..."
+                    required></textarea>
+            </div>
+
+            <button type="submit" class="button">
+                Send Message
+            </button>
+
+        </form>
+
+        <p id="formStatus" role="status"></p>
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Asala Mahmoud | CPIT405 Portfolio</p>
+</footer>
+
+</body>
+</html>
