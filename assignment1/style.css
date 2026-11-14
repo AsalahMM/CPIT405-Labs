@@ -349,3 +349,8 @@ nav a {
     font-size: 22px;
 }
 }
+
+/* Consistent Number Appearance */
+body {
+    font-variant-numeric: lining-nums tabular-nums;
+}
