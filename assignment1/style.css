@@ -350,7 +350,7 @@ nav a {
 }
 }
 
-/* Consistent Number Appearance */
-body {
+.student-number {
+    font-family: Arial, sans-serif;
     font-variant-numeric: lining-nums tabular-nums;
 }
