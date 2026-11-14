@@ -351,6 +351,10 @@ nav a {
 }
 
 .student-number {
-    font-family: Arial, sans-serif;
-    font-variant-numeric: lining-nums tabular-nums;
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-variant-numeric: normal;
+    font-feature-settings: normal;
+    font-size: 1em;
+    font-weight: normal;
+    letter-spacing: normal;
 }
